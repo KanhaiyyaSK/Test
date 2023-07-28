@@ -7,7 +7,24 @@ const fileUpload = require("express-fileupload");
 
 const errorMiddleware = require("./middleware/error");
 const dotenv = require("dotenv");
-dotenv.config({ path: "backend/config/config.env" });
+dotenv.config({ path: ".env" });
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      const allowedOrigins = [
+        "http://localhost:3000",
+        "https://test-pxe3v5pz0-kanhaiyyask.vercel.app/",
+      ];
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(morgan("dev"));
@@ -20,8 +37,6 @@ const product = require("./routes/productRoute");
 const user = require("./routes/userRoute");
 const order = require("./routes/orderRoute");
 const payment = require("./routes/paymentRoute");
-
-
 
 app.use("/api/v1", product);
 app.use("/api/v1", user);

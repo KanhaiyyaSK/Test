@@ -9,22 +9,7 @@ const errorMiddleware = require("./middleware/error");
 const dotenv = require("dotenv");
 dotenv.config({ path: ".env" });
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      const allowedOrigins = [
-        "http://localhost:3000",
-        "https://test-pxe3v5pz0-kanhaiyyask.vercel.app/",
-      ];
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  })
-);
+
 
 app.use(express.json());
 app.use(morgan("dev"));

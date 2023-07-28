@@ -10,7 +10,7 @@ import {
   CLEAR_ERRORS,
 } from "../constants/productConstants";
 
-const backendURL = "https://animates-jmuv.onrender.com";
+// const backendURL = "https://test-sk-d4kf.onrender.com";
 
 // Get All Products
 export const getProduct =
@@ -19,10 +19,10 @@ export const getProduct =
     try {
       dispatch({ type: ALL_PRODUCT_REQUEST });
 
-      let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+      let link = `https://test-sk-d4kf.onrender.com/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
 
       if (category) {
-        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+        link = `https://test-sk-d4kf.onrender.com/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
       }
 
       const { data } = await axios.get(link);
@@ -50,7 +50,7 @@ export const getProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`/api/v1/product/${id}`);
+    const { data } = await axios.get(`https://test-sk-d4kf.onrender.com/api/v1/product/${id}`);
     // data = product{details} => data.product = {details}
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,

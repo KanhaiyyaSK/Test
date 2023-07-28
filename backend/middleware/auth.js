@@ -11,10 +11,11 @@ exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHander("Please Login to access this resource", 401));
   }
 
-  // users token and db token verify karo 
+  // users token and db token verify karo
   const decodedData = jwt.verify(token, process.env.JWT_SECRET);
+  console.log("---->", process.env.JWT_SECRET);
 
-  // hai to usko req.user mein store karo like user can access now 
+  // hai to usko req.user mein store karo like user can access now
   req.user = await User.findById(decodedData.id);
 
   next();
@@ -22,8 +23,7 @@ exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
 
 exports.authorizeRoles = (...roles) => {
   // roles = [admin] hai joh hamne authjs se bheja hai
-  return (req, res, next) => {  
-    
+  return (req, res, next) => {
     // agar admin != user ka role protected route access karne ki try karra then nichewal error bhejo
     if (!roles.includes(req.user.role)) {
       return next(

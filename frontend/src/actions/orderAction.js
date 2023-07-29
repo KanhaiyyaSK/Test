@@ -86,7 +86,7 @@ import {
         },
       };
       const { data } = await axios.put(
-        `/api/v1/admin/order/${id}`,
+        `https://test-sk-d4kf.onrender.com/api/v1/admin/order/${id}`,
         order,
         config
       );

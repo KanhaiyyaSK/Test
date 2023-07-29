@@ -13,7 +13,6 @@ import LoginSignUp from "./component/user/LoginSignUp";
 import store from "./store";
 import { loadUser } from "./actions/userAction";
 
-
 import Profile from "./component/user/Profile";
 import ProtectedRoute from "./component/Route/ProtectedRoutes";
 import UpdateProfile from "./component/user/UpdateProfile";
@@ -36,7 +35,7 @@ const App = () => {
   const [stripeApiKey, setStripeApiKey] = useState("");
 
   async function getStripeApiKey() {
-    const { data } = await axios.get(`https://test-sk-d4kf.onrender.com/api/v1/${stripeApiKey}`);
+    const { data } = await axios.get("https://test-sk-d4kf.onrender.com/api/v1/stripeapikey");
 
     setStripeApiKey(data.stripeApiKey);
   }

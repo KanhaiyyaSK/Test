@@ -25,8 +25,9 @@ import {
   UPDATE_PASSWORD_FAIL,
 } from "../constants/userConstants";
 import axios from "axios";
-
+import { useSelector } from "react-redux";
 // Login
+
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: LOGIN_REQUEST });
@@ -78,7 +79,7 @@ export const loadUser = () => async (dispatch) => {
     const { data } = await axios.get(
       "https://test-sk-d4kf.onrender.com/api/v1/me"
     );
-    console.log("data",data);
+
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
   } catch (error) {

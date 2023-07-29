@@ -10,7 +10,6 @@ import {
   CLEAR_ERRORS,
 } from "../constants/productConstants";
 
-// const backendURL = "https://test-sk-d4kf.onrender.com";
 
 // Get All Products
 export const getProduct =

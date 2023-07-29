@@ -52,7 +52,11 @@ export const register = (userData) => async (dispatch) => {
 
     const config = { headers: { "Content-Type": "multipart/form-data" } };
 
-    const { data } = await axios.post(`https://test-sk-d4kf.onrender.com/api/v1/register`, userData, config);
+    const { data } = await axios.post(
+      `https://test-sk-d4kf.onrender.com/api/v1/register`,
+      userData,
+      config
+    );
 
     dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
   } catch (error) {
@@ -64,15 +68,27 @@ export const register = (userData) => async (dispatch) => {
 };
 
 // Load User
+// Assuming you have imported axios and defined the action types somewhere.
+
+// Load User
 export const loadUser = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST });
 
-    const { data } = await axios.get(`https://test-sk-d4kf.onrender.com/api/v1/me`);
+    const { data } = await axios.get(
+      "https://test-sk-d4kf.onrender.com/api/v1/me"
+    );
+    console.log("data",data);
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
   } catch (error) {
-    dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.message });
+    if (error.response && error.response.data && error.response.data.message) {
+      dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.message });
+    } else {
+      // If the error structure is unexpected, you can log the error for debugging purposes.
+      console.error("Error while loading user");
+      dispatch({ type: LOAD_USER_FAIL, payload: "An unknown error occurred." });
+    }
   }
 };
 
@@ -94,7 +110,11 @@ export const updateProfile = (userData) => async (dispatch) => {
 
     const config = { headers: { "Content-Type": "multipart/form-data" } };
 
-    const { data } = await axios.put(`https://test-sk-d4kf.onrender.com/api/v1/me/update`, userData, config);
+    const { data } = await axios.put(
+      `https://test-sk-d4kf.onrender.com/api/v1/me/update`,
+      userData,
+      config
+    );
 
     dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
   } catch (error) {
@@ -134,7 +154,11 @@ export const forgotPassword = (email) => async (dispatch) => {
 
     const config = { headers: { "Content-Type": "application/json" } };
 
-    const { data } = await axios.post(`https://test-sk-d4kf.onrender.com/api/v1/password/forgot`, email, config);
+    const { data } = await axios.post(
+      `https://test-sk-d4kf.onrender.com/api/v1/password/forgot`,
+      email,
+      config
+    );
 
     dispatch({ type: FORGOT_PASSWORD_SUCCESS, payload: data.message });
   } catch (error) {
